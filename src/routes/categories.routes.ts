@@ -1,22 +1,18 @@
-import { Router } from "express"; // o router ele nos ajuda a manipular as rotas de forma modular.
-// importar biblioteca multer
+import { Router } from "express";
 import multer from "multer";
 
-// import { CategoriesRepository } from "../modules/cars/repositories/CategoriesRepository";
-import { createCategoryController } from "../modules/cars/useCases/createCategory";
+import createCategoryController from "../modules/cars/useCases/createCategory";
 import { importCategoryController } from "../modules/cars/useCases/ImportCategory";
 import { listCategoriesController } from "../modules/cars/useCases/listCategories";
-// import { CreateCategoryService } from "../modules/cars/useCases/createCategory/CreateCategoryUseCase";
 
 const categoriesRoutes = Router();
 
-// instanciando função do multer
 const upload = multer({
     dest: "./tmp",
 });
 
 categoriesRoutes.post("/", (request, response) => {
-    return createCategoryController.handle(request, response);
+    return createCategoryController().handle(request, response);
 });
 
 categoriesRoutes.get("/", (request, response) => {
