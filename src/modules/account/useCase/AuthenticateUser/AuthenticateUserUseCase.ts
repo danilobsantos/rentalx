@@ -4,6 +4,7 @@ import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../../../errors/AppError";
 import { IUsersRepository } from "../../repositories/IUserRepository";
 
 interface IRequest {
@@ -31,7 +32,7 @@ class AuthenticateUserUseCase {
         const user = await this.usersRepository.findByEmail(email);
 
         if (!user) {
-            throw new Error("Email or password is incorrect!!");
+            throw new AppError("Email or password is incorrect!!", 401);
         }
 
         // verificar se a senha está correta
