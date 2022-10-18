@@ -33,6 +33,10 @@ export async function ensureAuthenticated(
         if (!user) {
             throw new AppError("User does not exists!!!", 401);
         }
+        // adicionando avatar
+        request.user = {
+            id: user_id,
+        };
 
         next();
     } catch {
